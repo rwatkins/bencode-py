@@ -12,6 +12,11 @@ class DecodeIntegerTest(TestCase):
         self.assertEqual(decode('i-12e'), -12)
 
 
+class DecodeStringTest(TestCase):
+    def test_string(self):
+        self.assertEqual(decode('5:Hello'), 'Hello')
+
+
 class EncodeIntegerTest(TestCase):
     def test_integer(self):
         self.assertEqual(encode(12), 'i12e')

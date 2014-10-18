@@ -1,3 +1,6 @@
+import re
+
+
 def encode(value):
     if isinstance(value, int):
         return 'i%se' % value
@@ -32,6 +35,28 @@ def parse_int(s, end=0):
         raise ValueError(u'Parsing int. Found illegal character. %s' % e)
 
 
+def parse_string(s, end=0):
+    """
+    5:Hello
+    """
+    value = ''
+    length_str = ''
+    nextchar = s[end:end+1]
+    assert re.match(r'\d', nextchar)
+    # parse length
+    while nextchar != ':':
+        length_str += nextchar
+        end += 1
+        nextchar = s[end:end+1]
+    try:
+        length = int(length_str)
+    except ValueError as e:
+        raise Exception('Error parsing string length: %s' % e)
+    end += 1
+    value = s[end:end+length]
+    return value, end + length
+
+
 def _decode(s, end=0):
     if not s:
         raise Exception('s is empty')
@@ -39,7 +64,9 @@ def _decode(s, end=0):
     nextchar = s[end:end+1]
     # Find value based on what it starts with
     if nextchar == 'i':
-        value, end = parse_int(s, end)
+        value, end = parse_int(s, end=end)
+    elif re.match(r'\d', nextchar):
+        value, end = parse_string(s, end=end)
     else:
         raise Exception("Don't know how to decode value beginning with %s"
                         % nextchar)
