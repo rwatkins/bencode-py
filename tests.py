@@ -8,6 +8,9 @@ class IntegerTest(TestCase):
     def test_integer(self):
         self.assertEqual(encode(12), 'i12e')
 
+    def test_negative(self):
+        self.assertEqual(encode(-12), 'i-12e')
+
 
 class StringTest(TestCase):
     def test_string(self):
