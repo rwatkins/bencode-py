@@ -14,5 +14,10 @@ class StringTest(TestCase):
         self.assertEqual(encode('Hello'), '5:Hello')
 
 
+class ListTest(TestCase):
+    def test_list(self):
+        self.assertEqual(encode([12, 'Hello']), 'li12e5:Helloe')
+
+
 if __name__ == '__main__':
     unittest.main()
