@@ -1,7 +1,15 @@
 import unittest
 from unittest import TestCase
 
-from bencode import encode
+from bencode import decode, encode
+
+
+class DecodeIntegerTest(TestCase):
+    def test_integer(self):
+        self.assertEqual(decode('i12e'), 12)
+
+    def test_negative(self):
+        self.assertEqual(decode('i-12e'), -12)
 
 
 class EncodeIntegerTest(TestCase):
