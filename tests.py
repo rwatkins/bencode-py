@@ -25,6 +25,18 @@ class DecodeListTest(TestCase):
         self.assertEqual(decode('li12el10:descriptoree'), [12, ['descriptor']])
 
 
+class DecodeDictTest(TestCase):
+    def test_dict(self):
+        self.assertEqual(
+            decode('d4:agesli26ei27ee4:name5:Riley6:parentd4:name5:Scottee'), {
+                'name': 'Riley',
+                'ages': [26, 27],
+                'parent': {
+                    'name': 'Scott',
+                },
+            })
+
+
 class EncodeIntegerTest(TestCase):
     def test_integer(self):
         self.assertEqual(encode(12), 'i12e')

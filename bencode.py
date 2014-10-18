@@ -71,6 +71,24 @@ def parse_list(s, end=0):
     return lst, end
 
 
+def parse_dict(s, end=0):
+    nextchar = s[end:end+1]
+    assert nextchar == 'd'
+    end += 1
+    nextchar = s[end:end+1]
+    obj = {}
+    while nextchar != 'e':
+        # parse key
+        key, end = parse_string(s, end=end)
+        end += 1
+        # parse value
+        value, end = _decode(s, end=end)
+        obj[key] = value
+        end += 1
+        nextchar = s[end:end+1]
+    return obj, end
+
+
 def _decode(s, end=0):
     if not s:
         raise Exception('s is empty')
@@ -83,6 +101,8 @@ def _decode(s, end=0):
         value, end = parse_string(s, end=end)
     elif nextchar == 'l':
         value, end = parse_list(s, end=end)
+    elif nextchar == 'd':
+        value, end = parse_dict(s, end=end)
     else:
         raise Exception("Don't know how to decode value beginning with %s"
                         % nextchar)
