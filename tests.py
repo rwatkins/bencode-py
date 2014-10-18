@@ -17,6 +17,14 @@ class DecodeStringTest(TestCase):
         self.assertEqual(decode('5:Hello'), 'Hello')
 
 
+class DecodeListTest(TestCase):
+    def test_list(self):
+        self.assertEqual(decode('li12e10:descriptore'), [12, 'descriptor'])
+
+    def test_nested_list(self):
+        self.assertEqual(decode('li12el10:descriptoree'), [12, ['descriptor']])
+
+
 class EncodeIntegerTest(TestCase):
     def test_integer(self):
         self.assertEqual(encode(12), 'i12e')

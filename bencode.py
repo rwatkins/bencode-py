@@ -54,7 +54,21 @@ def parse_string(s, end=0):
         raise Exception('Error parsing string length: %s' % e)
     end += 1
     value = s[end:end+length]
-    return value, end + length
+    return value, end + length - 1
+
+
+def parse_list(s, end=0):
+    nextchar = s[end:end+1]
+    assert nextchar == 'l'
+    end += 1
+    nextchar = s[end:end+1]
+    lst = []
+    while nextchar != 'e':
+        value, end = _decode(s, end=end)
+        lst.append(value)
+        end += 1
+        nextchar = s[end:end+1]
+    return lst, end
 
 
 def _decode(s, end=0):
@@ -67,6 +81,8 @@ def _decode(s, end=0):
         value, end = parse_int(s, end=end)
     elif re.match(r'\d', nextchar):
         value, end = parse_string(s, end=end)
+    elif nextchar == 'l':
+        value, end = parse_list(s, end=end)
     else:
         raise Exception("Don't know how to decode value beginning with %s"
                         % nextchar)
