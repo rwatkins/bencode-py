@@ -1,4 +1,4 @@
-```
+```python
 riley@rileydotbiz:~/code/bencode-py (master)$ ipython
 Python 2.7.5 (default, Mar  9 2014, 22:15:05)
 Type "copyright", "credits" or "license" for more information.
