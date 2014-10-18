@@ -4,7 +4,7 @@ from unittest import TestCase
 from bencode import encode
 
 
-class IntegerTest(TestCase):
+class EncodeIntegerTest(TestCase):
     def test_integer(self):
         self.assertEqual(encode(12), 'i12e')
 
@@ -12,17 +12,17 @@ class IntegerTest(TestCase):
         self.assertEqual(encode(-12), 'i-12e')
 
 
-class StringTest(TestCase):
+class EncodeStringTest(TestCase):
     def test_string(self):
         self.assertEqual(encode('Hello'), '5:Hello')
 
 
-class ListTest(TestCase):
+class EncodeListTest(TestCase):
     def test_list(self):
         self.assertEqual(encode([12, 'Hello']), 'li12e5:Helloe')
 
 
-class DictTest(TestCase):
+class EncodeDictTest(TestCase):
     def test_dict(self):
         self.assertEqual(
             encode({
