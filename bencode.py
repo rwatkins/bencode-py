@@ -16,7 +16,7 @@ def encode(value):
 
 def parse_int(s, end=0):
     """
-    i12e
+    i12e => 12
     """
     value = ''
     nextchar = s[end:end+1]
@@ -37,7 +37,7 @@ def parse_int(s, end=0):
 
 def parse_string(s, end=0):
     """
-    5:Hello
+    5:Hello => 'Hello'
     """
     value = ''
     length_str = ''
@@ -58,6 +58,9 @@ def parse_string(s, end=0):
 
 
 def parse_list(s, end=0):
+    """
+    l5:Hello6:world!e => ['Hello', 'world!']
+    """
     nextchar = s[end:end+1]
     assert nextchar == 'l'
     end += 1
@@ -72,6 +75,9 @@ def parse_list(s, end=0):
 
 
 def parse_dict(s, end=0):
+    """
+    d5:wordsl5:Hello6:world!ee => {'words': ['Hello', 'world!']}
+    """
     nextchar = s[end:end+1]
     assert nextchar == 'd'
     end += 1
